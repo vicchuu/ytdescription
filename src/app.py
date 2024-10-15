@@ -1,5 +1,15 @@
 #for user interaction
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
+#setup Langsmith trackin
+os.environ["LANGCHAIN_API_KEY"] =  os.getenv("LANGCHAIN_API_KEY")
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT")
+os.environ["COHERE_API_KEY"] = os.getenv("COHERE_API_KEY")
+os.environ['USER_AGENT'] = 'myagent'
+token = os.getenv("")
 from generateText import generate_description
 from translatingText import load_translation_model ,  translate_text
 import streamlit as st
@@ -25,12 +35,23 @@ if "generated_output" not in st.session_state:
 if "translated_output" not in st.session_state:
     st.session_state["translated_output"] = ""
 # User input for text/keywords
-user_input = st.text_input("Enter text or keywords", value="AI, automation, efficiency")
-
+user_input = st.text_input("Enter text or keywords", value="india independence after 1947")
+models = {
+    "LLaMA (Meta's LLaMA)": "meta-llama/LLaMA-7b-hf",#meta-llama/Llama-2-7b-chat-hf
+    "GPT-J (EleutherAI)": "EleutherAI/gpt-j-6B",
+    "GPT-NeoX-20B (EleutherAI)": "EleutherAI/gpt-neox-20b",
+    "BLOOM (BigScience)": "bigscience/bloom-1b1",
+    "T5 (Text-to-Text Transfer Transformer) small": "t5-small"
+}
+selected_model = st.selectbox("Select the llm model",
+                              options=list(models.keys()))
+model_selected = models[selected_model]
 # Process Button for Text Generation
 if st.button("Process"):
-    with st.spinner("Generating description..."):
-        st.session_state["generated_output"] = generate_description(user_input)
+    with st.spinner("Generating description... first time model loading takes some more time."):
+
+
+        st.session_state["generated_output"] = generate_description(user_input,model_selected)
         st.session_state["translated_output"] = ""
         #st.subheader("Generated Output")
         #st.write( st.session_state["generated_output"])

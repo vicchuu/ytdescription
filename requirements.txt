@@ -5,3 +5,5 @@ tensorflow
 torch
 sentencepiece
 sacremoses
+tf-keras
+python-dotenv

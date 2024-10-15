@@ -5,12 +5,13 @@
 from transformers import pipeline
 
 # Load the text generation model
-generator = pipeline('text-generation', model='EleutherAI/gpt-neo-125M')
 
 
-def generate_description(input_text):
+
+def generate_description(input_text,model):
     #prompt = f"Keywords: {''.join(keywords)}.\n Write a detailed description based on these keywords:"
     #result = generator(keywords, max_length=100, do_sample=True, temperature=0.7,truncation=True)
+    generator = pipeline('text-generation', model=model)
     result = generator(
         input_text,
         max_length=250,               # Increase the length to generate more tokens
