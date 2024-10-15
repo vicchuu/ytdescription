@@ -9,7 +9,7 @@ os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT")
 os.environ["COHERE_API_KEY"] = os.getenv("COHERE_API_KEY")
 os.environ['USER_AGENT'] = 'myagent'
-token = os.getenv("")
+token = "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"
 from generateText import generate_description
 from translatingText import load_translation_model ,  translate_text
 import streamlit as st
@@ -51,7 +51,7 @@ if st.button("Process"):
     with st.spinner("Generating description... first time model loading takes some more time."):
 
 
-        st.session_state["generated_output"] = generate_description(user_input,model_selected)
+        st.session_state["generated_output"] = generate_description(user_input,model_selected,token)
         st.session_state["translated_output"] = ""
         #st.subheader("Generated Output")
         #st.write( st.session_state["generated_output"])
