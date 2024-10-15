@@ -1,13 +1,11 @@
 #for user interaction
 import os
-from dotenv import load_dotenv
-load_dotenv()
 
 #setup Langsmith trackin
-os.environ["LANGCHAIN_API_KEY"] =  os.getenv("LANGCHAIN_API_KEY")
+os.environ["LANGCHAIN_API_KEY"] = "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"
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
-os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT")
-os.environ["COHERE_API_KEY"] = os.getenv("COHERE_API_KEY")
+os.environ["LANGCHAIN_PROJECT"] = "GENAIwithLangChain"
+os.environ["COHERE_API_KEY"] = "6ZVrRtmctd5QDGCHS9eqQ5v2IMuEapoIj97uVoWR"
 os.environ['USER_AGENT'] = 'myagent'
 token = "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"
 from generateText import generate_description
